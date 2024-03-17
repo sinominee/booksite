@@ -9,16 +9,15 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="">Deals</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Books</a>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Categories</a></li>
-                        <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="{% url 'home' %}">All Books</a></li>
+                        <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="{% url 'category' 'Foreign-Books' %}">FOREIGN BOOKS</a></li>
                         <li><a class="dropdown-item" href="{% url 'category' 'Nepali-Books' %}">NEPALI BOOKS</a></li>
                         <li><a class="dropdown-item" href="{% url 'category' 'Novels' %}">NOVELS</a></li>
-                        <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                        <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                        <li><a class="dropdown-item" href="#!">Top Seller</a></li>
+                        <li><a class="dropdown-item" href="{% url 'category' 'product.new_arrival' %}">New Arrivals</a></li>
                     </ul>
                 </li>
 
