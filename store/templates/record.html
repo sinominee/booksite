@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %} 
+
+    <div class="container">
+        <br/>
+        <br/>
+
+        <div class="card mb-3">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="{{ product_record.image.url }}" class="img-fluid rounded-start" alt="Book image">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h4 class="card-title">{{ product_record.name }}</h4>
+                </br>
+                  <p class="card-text"> <strong>AUTHOR: </strong>  {{ product_record.author }}</p>
+                  <p class="card-text"><strong>DESCRIPTION: </strong> {{ product_record.description }}</p>
+
+                  {% if product_record.is_sale %} 
+                  <div class="d-flex justify-content-center small text-warning mb-2"></div>
+                  रु <strike>{{ product_record.price }}</strike>
+                  &nbsp;
+                  <p class="card-text"> <strong>SALE PRICE: </strong> रु {{ product_record.sale_price }}
+                  <br/>
+                  {% else %}
+                  <p class="card-text"> <strong>PRICE: </strong>  {{ product_record.price }}</p>                
+                  {% endif %}
+                  <br/>
+                  <a href="{% url 'home' %}" class="btn btn-secondary "> Home </a>
+                  <a href="#" class="btn btn-info "> Purchase</a>
+                  <a href="#" class="btn btn-warning "> ADD To Cart </a>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+
+
+    <br/><br/><br/><br/><br/>
+    <br/><br/><br/><br/><br/>
+    <br/><br/><br/><br/><br/>
+{% endblock %}
