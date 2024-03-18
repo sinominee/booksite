@@ -15,7 +15,7 @@ def category(request, foo):
         products = Product.objects.filter(category=category)
         return render(request, 'category.html', {'products': products, 'category': category})
     except:
-        messages.success("That category doesnt exist")
+        messages.success(request, "That category doesnt exist")
         return redirect('home')
 
 
@@ -40,17 +40,17 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            messages.success(request, ("You Have Been Logged In !!"))
+            messages.success(request, "You Have Been Logged In !!")
             return redirect('home')
         else:
-            messages.success(request, ("There was an error, Please Try Again !!"))
+            messages.success(request, "There was an error, Please Try Again !!")
             return redirect('login')
     else:
         return render(request, 'login.html', {})
 
 def logout_user(request):
     logout(request)
-    messages.success(request, ("You have been logged out. Thanks for Stopping By! "))
+    messages.success(request, "You have been logged out. Thanks for Stopping By! ")
     return redirect('home')
 
 def register_user(request):
@@ -64,10 +64,10 @@ def register_user(request):
             #login User
             user = authenticate(username=username, password=password)
             login(request, user)
-            messages.success(request, ("You have been Registered successfully!! You can Now Login"))
+            messages.success(request, "You have been Registered successfully!! You can Now Login")
             return redirect('home')
         else:
-            messages.success(request, ("Whoops! There was a Problem Registering, Try again "))
+            messages.success(request, "Whoops! There was a Problem Registering, Try again ")
             return redirect('home')
     else:
         return render(request, 'register.html', {'form':form})

@@ -24,12 +24,14 @@
                   <p class="card-text"> <strong>SALE PRICE: </strong> रु {{ product_record.sale_price }}
                   <br/>
                   {% else %}
-                  <p class="card-text"> <strong>PRICE: </strong>  {{ product_record.price }}</p>                
+                  <p class="card-text"> <strong>PRICE: </strong>  {{ product_record.price }}
+                  ID: {{ product_record.id }}
+                  </p>               
                   {% endif %}
                   <br/>
                   <a href="{% url 'home' %}" class="btn btn-secondary "> Home </a>
                   <a href="#" class="btn btn-info "> Purchase</a>
-                  <a href="#" class="btn btn-warning "> ADD To Cart </a>
+                  <a href="#" type="button" value="{{ product_record.id }}" id="add-cart" class="btn btn-warning"> ADD To Cart </a>
                 </div>
               </div>
             </div>
@@ -40,4 +42,33 @@
     <br/><br/><br/><br/><br/>
     <br/><br/><br/><br/><br/>
     <br/><br/><br/><br/><br/>
+
+<script>
+  // check if button pressed
+$(document).on('click', '#add-cart', function(e){
+  e.preventDefault();
+  $.ajax({
+    type: 'POST',
+    url: "{% url 'cart_add' %}",
+    data: {
+      product_id :$('#add-cart').val(),
+      csrfmiddlewaretoken: '{{ csrf_token}}',   
+      action: 'post',    
+    },
+    
+    success: function(json){
+      console.log(json)
+    },
+
+    error: function(xhr, errmsg, err){
+
+    }
+
+   });
+
+})
+
+
+</script>
+
 {% endblock %}
