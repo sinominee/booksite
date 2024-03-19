@@ -18,20 +18,23 @@
                   <p class="card-text"><strong>DESCRIPTION: </strong> {{ product_record.description }}</p>
 
                   {% if product_record.is_sale %} 
-                  <div class="d-flex justify-content-center small text-warning mb-2"></div>
+                  
                   रु <strike>{{ product_record.price }}</strike>
                   &nbsp;
                   <p class="card-text"> <strong>SALE PRICE: </strong> रु {{ product_record.sale_price }}
+                  ID: {{ product_record.id }}
                   <br/>
                   {% else %}
                   <p class="card-text"> <strong>PRICE: </strong>  {{ product_record.price }}
                   ID: {{ product_record.id }}
                   </p>               
                   {% endif %}
+
+                  
                   <br/>
                   <a href="{% url 'home' %}" class="btn btn-secondary "> Home </a>
-                  <a href="#" class="btn btn-info "> Purchase</a>
-                  <a href="#" type="button" value="{{ product_record.id }}" id="add-cart" class="btn btn-warning"> ADD To Cart </a>
+                  <!-- <a href="#" class="btn btn-info "> Purchase</a> -->
+                  <button type="button" value="{{ product_record.id }}" id="add-cart" class="btn btn-warning"> ADD To Cart </a>
                 </div>
               </div>
             </div>
@@ -52,7 +55,7 @@ $(document).on('click', '#add-cart', function(e){
     url: "{% url 'cart_add' %}",
     data: {
       product_id :$('#add-cart').val(),
-      csrfmiddlewaretoken: '{{ csrf_token}}',   
+      csrfmiddlewaretoken: '{{ csrf_token }}',   
       action: 'post',    
     },
     

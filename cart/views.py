@@ -26,6 +26,7 @@ def cart_add(request):
         response = JsonResponse({'Product Name: ': product.name})
         return response
 
+
 def cart_delete(request):
     pass
 
