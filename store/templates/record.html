@@ -6,7 +6,7 @@
         <br/>
 
         <div class="card mb-3">
-            <div class="row g-0">
+            <div class="row g-3">
               <div class="col-md-4">
                 <img src="{{ product_record.image.url }}" class="img-fluid rounded-start" alt="Book image">
               </div>
@@ -18,23 +18,46 @@
                   <p class="card-text"><strong>DESCRIPTION: </strong> {{ product_record.description }}</p>
 
                   {% if product_record.is_sale %} 
-                  
                   रु <strike>{{ product_record.price }}</strike>
                   &nbsp;
                   <p class="card-text"> <strong>SALE PRICE: </strong> रु {{ product_record.sale_price }}
                   ID: {{ product_record.id }}
                   <br/>
+                  
                   {% else %}
                   <p class="card-text"> <strong>PRICE: </strong>  {{ product_record.price }}
                   ID: {{ product_record.id }}
                   </p>               
                   {% endif %}
-
                   
+
+                    <div class="row justify-content-center">
+                      <div class="col-md-2">Quantity:</div>
+                      <div class="col-md-2">
+                        <select class="form-select form-select-sm" 
+                        id="qty-cart">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        </select>
+                      </div>
+                    </div>
                   <br/>
-                  <a href="{% url 'home' %}" class="btn btn-secondary "> Home </a>
-                  <!-- <a href="#" class="btn btn-info "> Purchase</a> -->
-                  <button type="button" value="{{ product_record.id }}" id="add-cart" class="btn btn-warning"> ADD To Cart </a>
+                  
+                  <!-- <div class="d-flex justify-content-center align-items-center" > -->
+                  <div class="mx-auto" style="width: 200px;">
+                    <a href="{% url 'home' %}" class="btn btn-secondary " > Home </a>
+                    <!-- <a href="#" class="btn btn-info "> Purchase</a> -->
+                    <button type="button" value="{{ product_record.id }}" id="add-cart" class="btn btn-warning "> ADD To Cart </a>
+                  </div>
+                    
                 </div>
               </div>
             </div>
@@ -55,12 +78,15 @@ $(document).on('click', '#add-cart', function(e){
     url: "{% url 'cart_add' %}",
     data: {
       product_id :$('#add-cart').val(),
+      product_qty : $('#qty-cart option:selected').text(),
       csrfmiddlewaretoken: '{{ csrf_token }}',   
       action: 'post',    
     },
     
     success: function(json){
-      console.log(json)
+      // console.log(json)
+      document.getElementById("cart_quantity").
+      textContent = json.qty
     },
 
     error: function(xhr, errmsg, err){
